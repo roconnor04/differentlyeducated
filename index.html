@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Differently Educated</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #E8C832;
+      --pink:   #D4697A;
+      --green:  #5A8C5E;
+      --black:  #111111;
+      --white:  #F5F3EE;
+      --off:    #E8E4DC;
+    }
+
+    html, body {
+      width: 100%; min-height: 100vh;
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── MARQUEE STRIP ─── */
+    .marquee-wrap {
+      background: var(--black);
+      color: var(--yellow);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 12px 0;
+      position: relative;
+      z-index: 10;
+    }
+    .marquee-track {
+      display: inline-block;
+      animation: marquee 18s linear infinite;
+    }
+    .marquee-track span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 48px;
+    }
+    .marquee-track span.dot {
+      color: var(--pink);
+      padding: 0;
+    }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      border-bottom: 2px solid var(--black);
+    }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .nav-logo em {
+      font-style: italic;
+      font-weight: 700;
+    }
+    .nav-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      background: var(--black);
+      padding: 6px 14px;
+    }
+
+    /* ─── HERO GRID ─── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      grid-template-rows: auto auto;
+      border-bottom: 2px solid var(--black);
+    }
+
+    /* BIG TYPE BLOCK */
+    .type-block {
+      grid-column: 1;
+      grid-row: 1;
+      padding: 40px 32px 0;
+      border-right: 2px solid var(--black);
+    }
+
+    .big-type {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(100px, 18vw, 220px);
+      line-height: 0.88;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      user-select: none;
+    }
+    .big-type .t-outline {
+      -webkit-text-stroke: 3px var(--black);
+      color: transparent;
+    }
+    .big-type .t-yellow { color: var(--yellow); }
+    .big-type .t-pink   { color: var(--pink);   }
+    .big-type .t-green  { color: var(--green);  }
+    .big-type .t-black  { color: var(--black);  }
+
+    .big-type .line {
+      display: block;
+      overflow: hidden;
+      line-height: 0.92;
+    }
+    .big-type .line .inner {
+      display: block;
+      transform: translateY(110%);
+      animation: slideUp 0.75s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .big-type .line:nth-child(1) .inner { animation-delay: 0.1s; }
+    .big-type .line:nth-child(2) .inner { animation-delay: 0.22s; }
+    .big-type .line:nth-child(3) .inner { animation-delay: 0.34s; }
+    .big-type .line:nth-child(4) .inner { animation-delay: 0.46s; }
+
+    @keyframes slideUp {
+      to { transform: translateY(0); }
+    }
+
+    /* SIDE PANEL */
+    .side-panel {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-yellow {
+      background: var(--yellow);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      border-bottom: 2px solid var(--black);
+    }
+    .side-yellow-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      line-height: 1.6;
+      color: var(--black);
+    }
+
+    .side-countdown {
+      background: var(--black);
+      padding: 24px;
+      border-bottom: 2px solid var(--black);
+    }
+    .side-countdown-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+    .countdown-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .cd-cell { display: flex; flex-direction: column; }
+    .cd-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 52px;
+      line-height: 1;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .cd-lbl {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-top: 2px;
+    }
+
+    .side-green {
+      background: var(--green);
+      padding: 20px 24px;
+    }
+    .side-green p {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--white);
+    }
+
+    /* BOTTOM ROW */
+    .bottom-row {
+      grid-column: 1;
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-right: 2px solid var(--black);
+    }
+
+    .manifesto-block {
+      padding: 32px;
+      border-right: 2px solid var(--black);
+      background: var(--off);
+    }
+    .manifesto-block .line-bar {
+      width: 40px;
+      height: 4px;
+      background: var(--pink);
+      margin-bottom: 20px;
+    }
+    .manifesto-block p {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--black);
+    }
+
+    .email-block {
+      padding: 32px;
+      background: var(--pink);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .email-block-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 36px;
+      line-height: 1;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .email-form { margin-top: 24px; }
+    .email-form input {
+      width: 100%;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.4);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 15px;
+      padding: 13px 16px;
+      outline: none;
+      display: block;
+      margin-bottom: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .email-form input::placeholder { color: rgba(255,255,255,0.55); }
+    .email-form input:focus {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.22);
+    }
+    .email-form button {
+      width: 100%;
+      background: var(--black);
+      color: var(--yellow);
+      border: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 14px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .email-form button:hover {
+      background: var(--yellow);
+      color: var(--black);
+    }
+    .email-success {
+      display: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--white);
+      margin-top: 20px;
+      line-height: 1.4;
+    }
+
+    /* ─── COLOUR BAR ─── */
+    .colour-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-top: 2px solid var(--black);
+    }
+    .cb-cell {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-right: 2px solid var(--black);
+    }
+    .cb-cell:last-child { border-right: none; }
+    .cb-yellow { background: var(--yellow); color: var(--black); }
+    .cb-pink   { background: var(--pink);   color: var(--white); }
+    .cb-green  { background: var(--green);  color: var(--white); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--black);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,243,238,0.35);
+    }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,243,238,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--yellow); }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+      .type-block { border-right: none; padding: 28px 20px 0; }
+      .big-type { font-size: clamp(80px, 22vw, 140px); }
+      .big-type .t-outline { -webkit-text-stroke: 2px var(--black); }
+      .side-panel { grid-column: 1; grid-row: 2; border-top: 2px solid var(--black); }
+      .bottom-row { grid-column: 1; grid-row: 3; grid-template-columns: 1fr; border-right: none; }
+      .manifesto-block { border-right: none; border-bottom: 2px solid var(--black); }
+      nav { padding: 16px 20px; }
+      footer { padding: 14px 20px; }
+      .colour-bar { grid-template-columns: 1fr; }
+      .cb-cell { border-right: none; border-bottom: 2px solid var(--black); height: 56px; }
+      .cb-cell:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Differently Educated</span><span class="dot">✦</span>
+      <span>Coming Soon</span><span class="dot">✦</span>
+      <span>Love Over Ego</span><span class="dot">✦</span>
+      <span>Understanding Over Judgement</span><span class="dot">✦</span>
+      <span>Acceptance Over Exclusion</span><span class="dot">✦</span>
+      <span>Drop 01</span><span class="dot">✦</span>
+      <span>Differently Educated</span><span class="dot">✦</span>
+      <span>Coming Soon</span><span class="dot">✦</span>
+      <span>Love Over Ego</span><span class="dot">✦</span>
+      <span>Understanding Over Judgement</span><span class="dot">✦</span>
+      <span>Acceptance Over Exclusion</span><span class="dot">✦</span>
+      <span>Drop 01</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo"><em>Differently</em> Educated</div>
+    <div class="nav-tag">Drop 01 — 2025</div>
+  </nav>
+
+  <!-- HERO GRID -->
+  <div class="hero">
+
+    <div class="type-block">
+      <div class="big-type">
+        <span class="line"><span class="inner t-black">Differ</span></span>
+        <span class="line"><span class="inner t-outline">ently</span></span>
+        <span class="line"><span class="inner t-yellow">Edu</span></span>
+        <span class="line"><span class="inner t-black">cated.</span></span>
+      </div>
+    </div>
+
+    <div class="side-panel">
+      <div class="side-yellow">
+        <div class="side-yellow-text">
+          This is not<br/>just clothing.<br/><br/>
+          It is a statement.<br/>
+          A quiet rebellion.<br/>
+          Proof that empathy<br/>is strength.
+        </div>
+      </div>
+
+      <div class="side-countdown">
+        <div class="side-countdown-label">Dropping In</div>
+        <div class="countdown-row">
+          <div class="cd-cell"><div class="cd-num" id="days">00</div><div class="cd-lbl">Days</div></div>
+          <div class="cd-cell"><div class="cd-num" id="hours">00</div><div class="cd-lbl">Hours</div></div>
+          <div class="cd-cell"><div class="cd-num" id="minutes">00</div><div class="cd-lbl">Mins</div></div>
+          <div class="cd-cell"><div class="cd-num" id="seconds">00</div><div class="cd-lbl">Secs</div></div>
+        </div>
+      </div>
+
+      <div class="side-green">
+        <p>"No matter your background, your story, your identity or your struggle — if you were raised to embrace love, you are one of us."</p>
+      </div>
+    </div>
+
+    <div class="bottom-row">
+      <div class="manifesto-block">
+        <div class="line-bar"></div>
+        <p>
+          In a world where too many have been taught fear, division and hate, we stand for something different. We were Differently Educated. Educated to choose love over ego. Understanding over judgement. Acceptance over exclusion.
+        </p>
+      </div>
+
+      <div class="email-block">
+        <div class="email-block-title">Be First<br/>In Line.</div>
+        <div class="email-form" id="emailForm">
+          <input type="email" id="emailInput" placeholder="your@email.com" />
+          <button onclick="handleSignup()">Notify Me →</button>
+        </div>
+        <div class="email-success" id="successMsg">
+          You're in. ✦<br/>We'll hit you when it drops.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COLOUR BAR -->
+  <div class="colour-bar">
+    <div class="cb-cell cb-yellow">Love Over Ego</div>
+    <div class="cb-cell cb-pink">Understanding Over Judgement</div>
+    <div class="cb-cell cb-green">Acceptance Over Exclusion</div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Differently Educated. All Rights Reserved.</p>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const target = new Date();
+    target.setDate(target.getDate() + 90);
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function tick() {
+      const diff = target - new Date();
+      if (diff <= 0) return;
+      document.getElementById('days').textContent    = pad(Math.floor(diff / 86400000));
+      document.getElementById('hours').textContent   = pad(Math.floor((diff % 86400000) / 3600000));
+      document.getElementById('minutes').textContent = pad(Math.floor((diff % 3600000) / 60000));
+      document.getElementById('seconds').textContent = pad(Math.floor((diff % 60000) / 1000));
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    function handleSignup() {
+      const val = document.getElementById('emailInput').value.trim();
+      if (!val || !val.includes('@')) {
+        const inp = document.getElementById('emailInput');
+        inp.style.borderColor = 'rgba(255,255,255,0.9)';
+        inp.style.background  = 'rgba(255,255,255,0.3)';
+        setTimeout(() => { inp.style.borderColor = ''; inp.style.background = ''; }, 1400);
+        return;
+      }
+      document.getElementById('emailForm').style.display  = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }
+    document.getElementById('emailInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') handleSignup();
+    });
+  </script>
+</body>
+</html>
